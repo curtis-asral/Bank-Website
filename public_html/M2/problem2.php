@@ -7,6 +7,7 @@ function getTotal($arr) {
     echo "<br>Processing Array:<br><pre>" . var_export($arr, true) . "</pre>";
     $total = 0.00;
     //TODO do adding here
+    //cca3 2/13/2023
     foreach ($arr as $n) {
         $total += $n;
     }
