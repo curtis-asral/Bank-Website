@@ -13,7 +13,13 @@
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
                 //TODO: add code for processing the current selection 
-
+                const links = document.getElementsByTagName('a');
+                for (let i = 0; i < links.length; i++) {
+                    links[i].addEventListener('click', function(event) {
+                        event.preventDefault(); // prevent the link from navigating to a new page
+                        updateCurrentPage(event.target.getAttribute('href'));
+                    });
+                }
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
@@ -61,6 +67,10 @@
         h1, a {
             text-transform: capitalize;
         }
+
+        /* Update the content of the <h1> tag with the link text */
+        
+
         
     </style>
     <!-- make the necessary edits above this line -->
