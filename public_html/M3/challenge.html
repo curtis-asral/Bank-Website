@@ -26,15 +26,22 @@
             float: left;
         }
         
+        /* Get rid of the navigation list item markers
+           Give the navigation a background
+           Add some styling of your choice */
 
-
-        /* ul {
+        nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
             overflow: hidden;
             background-color: #333333;
-        } */
+        }
+
+        /* Change the "bullet points" of this entire list to checkmarks (✓) */
+        nav ul li:before {
+            content: '✓';
+        }
         
     </style>
     <!-- make the necessary edits above this line -->
