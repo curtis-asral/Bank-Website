@@ -13,13 +13,16 @@
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
                 //TODO: add code for processing the current selection 
+                //Note: likely you'll want to call updateCurrentPage towards the end
+                // Update the content of the <h1> tag with the link text
                 const links = document.getElementsByTagName('a');
+                const title = document.getElementsByTagName('title')[0];
                 for (let i = 0; i < links.length; i++) {
                     links[i].addEventListener('click', function(event) {
                         updateCurrentPage(event.target.text);
+                        title.textContent = event.target.text;
                     });
                 }
-                //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
         getCurrentSelection();
@@ -67,10 +70,6 @@
         h1, a {
             text-transform: capitalize;
         }
-
-        /* Update the content of the <h1> tag with the link text */
-        
-
         
     </style>
     <!-- make the necessary edits above this line -->
