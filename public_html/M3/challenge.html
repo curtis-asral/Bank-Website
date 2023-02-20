@@ -16,9 +16,7 @@
                 const links = document.getElementsByTagName('a');
                 for (let i = 0; i < links.length; i++) {
                     links[i].addEventListener('click', function(event) {
-                        event.preventDefault(); // prevent the link from navigating to a new page
-                        console.log(event.target.getAttribute('href'));
-                        updateCurrentPage(event.target.getAttribute('href'));
+                        updateCurrentPage(event.target.text);
                     });
                 }
                 //Note: likely you'll want to call updateCurrentPage towards the end
