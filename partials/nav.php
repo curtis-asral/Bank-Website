@@ -61,9 +61,11 @@ session_start();
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('logout.php'); ?>">Logout</a></li>
                 <?php endif; ?>
             </ul>
-            <!-- this is what changed for this gist -->
-            <span class="navbar-text show-balance">
-                Test Placeholder, should get replaced if balance.php loads and works
+            <span class="navbar-text show-username">
+                <?php
+                    $username = get_username();
+                    echo "Logged in as <span style='color: blue;'>$username</span>";
+                ?>
             </span>
         </div>
     </div>

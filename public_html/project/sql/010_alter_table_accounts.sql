@@ -1,0 +1,1 @@
+ALTER TABLE Accounts ADD CONSTRAINT check (LENGTH(account) = 12)
