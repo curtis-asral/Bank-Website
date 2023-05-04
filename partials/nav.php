@@ -63,8 +63,10 @@ session_start();
             </ul>
             <span class="navbar-text show-username">
                 <?php
-                    $username = get_username();
-                    echo "Logged in as <span style='color: blue;'>$username</span>";
+                    if (is_logged_in()) {
+                        $username = get_username();
+                        echo "Logged in as <span style='color: blue;'>$username</span>";
+                    }
                 ?>
             </span>
         </div>
