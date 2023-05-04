@@ -1,5 +1,4 @@
 CREATE TABLE IF NOT EXISTS Transactions(
-    -- this will be like the bank project transactions table (pairs of transactions)
     id int AUTO_INCREMENT PRIMARY KEY ,
     src int,
     dest int,
