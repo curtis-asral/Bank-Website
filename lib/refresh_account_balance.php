@@ -11,7 +11,7 @@ function refresh_account_balance($account_id)
     try {
         $stmt->execute([":src" => $account_id]);
         if (is_logged_in() && $account_id == get_user_account_id()) {
-            get_or_create_account(); //refresh session data
+            //get_or_create_account(); //refresh session data
         }
     } catch (PDOException $e) {
         error_log(var_export($e->errorInfo, true));
