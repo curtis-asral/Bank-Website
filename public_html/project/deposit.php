@@ -39,7 +39,7 @@ $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <form method="POST" action="deposit.php">
         <div class="form-group">
             <label for="deposit">Deposit Amount:</label>
-            <input type="number" class="form-control" id="deposit_amount" name="deposit_amount" min="5" required>
+            <input type="number" class="form-control" id="deposit_amount" name="deposit_amount" min="1" required>
         </div>
         <div class="form-group">
             <label for="notes">Notes:</label>
@@ -94,8 +94,6 @@ if (isset($_POST['deposit'])) {
     }
 }
 ?>
-
-
 
 <?php
 require(__DIR__ . "/../../partials/footer.php");
