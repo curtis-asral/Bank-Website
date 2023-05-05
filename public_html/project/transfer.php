@@ -17,11 +17,11 @@ $stmt->execute();
 $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <head>
-    <title>Transfer</title>
+    <title>Internal Transfer</title>
 </head>
 <body>
     <div class="form-group">
-        <h1>Transfer</h1>
+        <h1>Internal Transfer</h1>
     </div>
     <div class="form-group d-flex">
         <li class="nav-item dropdown">
