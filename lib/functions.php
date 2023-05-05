@@ -30,4 +30,5 @@ require(__DIR__ . "/redirect.php");
 require(__DIR__ . "/generate_account_number.php");
 require(__DIR__ . "/update_account_balance.php");
 require(__DIR__ . "/make_deposit.php");
+require(__DIR__ . "/make_withdraw.php");
 ?>
