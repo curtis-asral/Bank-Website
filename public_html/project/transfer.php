@@ -116,9 +116,13 @@ if (isset($_POST['transfer'])) {
     } if (!$flag) {
         $source_account_number = $_COOKIE['source_account'];
         $destination_account_number = $_COOKIE['destination_account'];
-        $transfer = $_POST['transfer_amount'];
-        $notes = $_POST['notes'];
-        make_transfer($source_account_number, $destination_account_number, $transfer, $notes);
+        if ($source_account_number == $destination_account_number) {
+            flash("Source and destination accounts must be different", "warning");
+        } else {
+            $transfer = $_POST['transfer_amount'];
+            $notes = $_POST['notes'];
+            make_transfer($source_account_number, $destination_account_number, $transfer, $notes);
+        }
     }
 }
 ?>
