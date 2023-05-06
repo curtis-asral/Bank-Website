@@ -88,8 +88,12 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
-$firstName = get_user_first_name();
-$lastName = get_user_last_name();
+$db = getDB();
+$stmt = $db->prepare("SELECT first_name, last_name from Users where id = :id LIMIT 1");
+$stmt->execute([":id" => get_user_id()]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$firstName = $user["first_name"];
+$lastName = $user["last_name"];
 ?>
 <div class="container-fluid">
     <h1>Profile</h1>
