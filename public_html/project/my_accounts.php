@@ -35,7 +35,7 @@ $accounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($accounts as $account) : ?>
                     <tr>
                         <td>
-                            <a href="transaction_history.php?account=<?php echo $account['account']; ?>">
+                            <a href="transaction_history.php?account=<?php echo $account['account']; ?>&type=all">
                                 <?php echo $account['account']; ?>
                             </a>
                         </td>
