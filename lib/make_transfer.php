@@ -1,5 +1,5 @@
 <?php
-function make_transfer($source_account_number, $destination_account_number, $transfer, $notes = "") {
+function make_transfer($source_account_number, $destination_account_number, $transfer, $notes = "", $type = "Transfer") {
 
     $db = getDB();
 
@@ -32,7 +32,7 @@ function make_transfer($source_account_number, $destination_account_number, $tra
         ":src" => $source_account_id,
         ":dest" => $destination_account_id,
         ":diff" => -1*$transfer,
-        ":reason" => "Transfer",
+        ":reason" => $type,
         ":details" => $notes
     ]);
 
@@ -43,7 +43,7 @@ function make_transfer($source_account_number, $destination_account_number, $tra
         ":src" => $destination_account_id,
         ":dest" => $source_account_id,
         ":diff" => $transfer,
-        ":reason" => "Transfer",
+        ":reason" => $type,
         ":details" => $notes
     ]);
 

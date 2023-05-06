@@ -9,7 +9,8 @@ is_logged_in(true)
         <li><a href="<?php echo get_url('my_accounts.php'); ?>">My Accounts</li>
         <li><a href="<?php echo get_url('deposit.php'); ?>">Deposit</li>
         <li><a href="<?php echo get_url('withdraw.php'); ?>">Withdraw</li>
-        <li><a href="<?php echo get_url('transfer.php'); ?>">Transfer</li>
+        <li><a href="<?php echo get_url('internal_transfer.php'); ?>">Internal Transfer</li>
+        <li><a href="<?php echo get_url('external_transfer.php'); ?>">External Transfer</li>
         <li><a href="<?php echo get_url('profile.php'); ?>">Profile</li>
     </ul>
 
