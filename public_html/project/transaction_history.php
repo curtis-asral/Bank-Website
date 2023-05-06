@@ -172,6 +172,12 @@ $transactions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             Transfers
                         </a>
                     </li>
+                    <li class="dropdown-item" id="transaction-type">
+                        <a href="transaction_history.php?account=<?php echo $account_number ?>&from=<?php echo $fromDate; ?>&to=<?php echo $transaction['created']; ?>&type=<?php echo "Ext-Transfer"; ?>"
+                        style="text-decoration:none; color:#333;">
+                            Ext-Transfers
+                        </a>
+                    </li>
                 </ul>
             </li>
         </div>
