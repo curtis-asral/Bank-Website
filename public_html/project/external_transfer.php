@@ -48,11 +48,14 @@ $allAccounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </button>
             <ul class="dropdown-menu" aria-labelledby="destinationDropdown">
                 <?php
+                    $flag = FALSE;
                     foreach ($allAccounts as $account) :
                     if (isset($_POST['search'])) {
+                        $flag = TRUE;
                         $last = $_POST['last'];
                         $four = $_POST['four'];
                         if (substr($account['account'], -4) == $four) {
+                            $flag = FALSE;
                 ?>
                     <li class="dropdown-item" id="destination-account">
                         <?php
@@ -63,7 +66,12 @@ $allAccounts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             }
                         ?>
                     </li>
-                <?php endforeach; ?>
+                <?php
+                    endforeach;
+                    if ($flag) {
+                        flash("No accounts found", "warning");
+                    }
+                ?>
             </ul>
         </li>
         <h3>Lookup:</h3>
