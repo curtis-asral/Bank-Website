@@ -22,6 +22,14 @@
     var K = 75;
     var numFive = 101;
     var numTwo = 98;
+    var A = 65;
+    var D = 68;
+    var LEFT = 37;
+    var RIGHT = 39;
+    var J = 74;
+    var L = 76;
+    var numOne = 97;
+    var numThree = 99;
 
     // Keep track of pressed keys
     var keys = {
@@ -32,7 +40,15 @@
     numFive: false,
     numTwo: false,
     UP: false,
-    DOWN: false
+    DOWN: false,
+    A: false,
+    D: false,
+    J: false,
+    K: false,
+    numOne: false,
+    numThree: false,
+    LEFT: false,
+    RIGHT: false
     };
 
     // Create a rectangle object - for paddles, ball, etc
@@ -139,6 +155,30 @@
     if (e.keyCode === DOWN) {
         keys.DOWN = true;
     }
+    if (e.keyCode === A) {
+        keys.A = true;
+    }
+    if (e.keyCode === D) {
+        keys.D = true;
+    }
+    if (e.keyCode === J) {
+        keys.J = true;
+    }
+    if (e.keyCode === L) {
+        keys.L = true;
+    }
+    if (e.keyCode === numOne) {
+        keys.numOne = true;
+    }
+    if (e.keyCode === numThree) {
+        keys.numThree = true;
+    }
+    if (e.keyCode === LEFT) {
+        keys.LEFT = true;
+    }
+    if (e.keyCode === RIGHT) {
+        keys.RIGHT = true;
+    }
     });
 
     // Listen for keyup events
@@ -167,6 +207,30 @@
     if (e.keyCode === DOWN) {
         keys.DOWN = false;
     }
+    if (e.keyCode === A) {
+        keys.A = false;
+    }
+    if (e.keyCode === D) {
+        keys.D = false;
+    }
+    if (e.keyCode === J) {
+        keys.J = false;
+    }
+    if (e.keyCode === L) {
+        keys.L = false;
+    }
+    if (e.keyCode === numOne) {
+        keys.numOne = false;
+    }
+    if (e.keyCode === numThree) {
+        keys.numThree = false;
+    }
+    if (e.keyCode === LEFT) {
+        keys.LEFT = false;
+    }
+    if (e.keyCode === RIGHT) {
+        keys.RIGHT = false;
+    }
     });
 
     // Show the menu
@@ -181,9 +245,9 @@
     context.fillText('Click to Start', canvas.width / 2, canvas.height / 3);
     context.font = '14px Arial';
     context.textAlign = 'left';
-    context.fillText('Team 1: P1 - W (up) and S (down) P2 - I (up) and K (down)', 5, (canvas.height / 3) * 2);
+    context.fillText('Team 1: P1-WASD P2-IJKL', 5, (canvas.height / 3) * 2);
     context.textAlign = 'right';
-    context.fillText('Team 2: P1 - UP (up) and DOWN (down) P2 - Numpad5 (up) and Numpad2 (down)', canvas.width - 5, (canvas.height / 3) * 2 + 30);
+    context.fillText('Team 2: P1-Arrow Keys P2-Numpad 5123', canvas.width - 5, (canvas.height / 3) * 2 + 30);
     // Start the game on a click
     canvas.addEventListener('click', startGame);
     }
@@ -243,6 +307,30 @@
     if (keys.numTwo) {
         rightPaddle2.y += rightPaddle2.s;
     }
+    if (keys.A) {
+        leftPaddle.x -= leftPaddle.s;
+    }
+    if (keys.D) {
+        leftPaddle.x += leftPaddle.s;
+    }
+    if (keys.LEFT) {
+        rightPaddle.x -= rightPaddle.s;
+    }
+    if (keys.RIGHT) {
+        rightPaddle.x += rightPaddle.s;
+    }
+    if (keys.J) {
+        leftPaddle2.x -= leftPaddle2.s;
+    }
+    if (keys.L) {
+        leftPaddle2.x += leftPaddle2.s;
+    }
+    if (keys.numOne) {
+        rightPaddle2.x -= rightPaddle2.s;
+    }
+    if (keys.numThree) {
+        rightPaddle2.x += rightPaddle2.s;
+    }
     // Move the ball
     ball.x += ball.sX;
     ball.y += ball.sY;
@@ -250,7 +338,7 @@
     if (ball.y < 0 || ball.y + ball.h > canvas.height) {
         ball.sY *= -1;
     }
-    // Don't let the paddles go off screen
+    // Don't let the paddles go off screen or accross half
     [leftPaddle, rightPaddle, leftPaddle2, rightPaddle2].forEach(function(paddle) {
         if (paddle.y < 0) {
         paddle.y = 0;
@@ -258,7 +346,24 @@
         if (paddle.y + paddle.h > canvas.height) {
         paddle.y = canvas.height - paddle.h;
         }
+        if (paddle.x < 0) {
+        paddle.x = 0;
+        } 
+        if (paddle.x + paddle.w > canvas.width) {
+        paddle.x = canvas.width - paddle.w;
+        }
     });
+    [leftPaddle, leftPaddle2].forEach(function(paddle) {
+        if (paddle.x + paddle.w + 25 > canvas.width / 2) {
+        paddle.x = canvas.width / 2 - paddle.w - 25;
+        }
+    });
+    [rightPaddle, rightPaddle2].forEach(function(paddle) {
+        if (paddle.x - 25 < canvas.width / 2) {
+        paddle.x = canvas.width / 2 + 25;
+        }
+    });
+    
     // Bounce the ball off the paddles
     if (ball.y + ball.h/2 >= leftPaddle.y && ball.y + ball.h/2 <= leftPaddle.y + leftPaddle.h) {
         if (ball.x <= leftPaddle.x + leftPaddle.w) {
@@ -282,11 +387,11 @@
         }
     }
     // Score if the ball goes past a paddle
-    if (ball.x < leftPaddle.x) {
+    if (ball.x < 0) {
         rightScore++;
         resetBall();
         ball.sX *= -1;
-    } else if (ball.x + ball.w > rightPaddle.x + rightPaddle.w) {
+    } else if (ball.x + ball.w > canvas.width) {
         leftScore++;
         resetBall();
         ball.sX *= -1;
