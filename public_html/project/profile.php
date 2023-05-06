@@ -6,10 +6,12 @@ is_logged_in(true);
 if (isset($_POST["save"])) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
+    $firstName = se($_POST, "firstName", null, false);
+    $lastName = se($_POST, "lastName", null, false);
 
-    $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+    $params = [":email" => $email, ":username" => $username, ":first_name" => $firstName, ":last_name" => $lastName, ":id" => get_user_id()];
     $db = getDB();
-    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+    $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, first_name = :first_name, last_name = :last_name where id = :id");
     try {
         $stmt->execute($params);
         flash("Profile saved", "success");
@@ -29,7 +31,7 @@ if (isset($_POST["save"])) {
         }
     }
     //select fresh data from table
-    $stmt = $db->prepare("SELECT id, email, username from Users where id = :id LIMIT 1");
+    $stmt = $db->prepare("SELECT id, email, username, first_name, last_name from Users where id = :id LIMIT 1");
     try {
         $stmt->execute([":id" => get_user_id()]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -37,6 +39,8 @@ if (isset($_POST["save"])) {
             //$_SESSION["user"] = $user;
             $_SESSION["user"]["email"] = $user["email"];
             $_SESSION["user"]["username"] = $user["username"];
+            $_SESSION["user"]["first_name"] = $user["first_name"];
+            $_SESSION["user"]["last_name"] = $user["last_name"];
         } else {
             flash("User doesn't exist", "danger");
         }
@@ -84,6 +88,8 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
+$firstName = get_user_first_name();
+$lastName = get_user_last_name();
 ?>
 <div class="container-fluid">
     <h1>Profile</h1>
@@ -96,8 +102,16 @@ $username = get_username();
             <label class="form-label" for="username">Username</label>
             <input class="form-control" type="text" name="username" id="username" value="<?php se($username); ?>" />
         </div>
+        <div class="mb-3">
+            <label class="form-label" for="firstName">First Name</label>
+            <input class="form-control" type="text" name="firstName" id="firstName" value="<?php se($firstName); ?>" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="lastName">Last Name</label>
+            <input class="form-control" type="text" name="lastName" id="lastName" value="<?php se($lastName); ?>" />
+        </div>
         <!-- DO NOT PRELOAD PASSWORD -->
-        <div class="mb-3">Password Reset</div>
+        <div class="mb-3"><strong>Password Reset:</strong></div>
         <div class="mb-3">
             <label class="form-label" for="cp">Current Password</label>
             <input class="form-control" type="password" name="currentPassword" id="cp" />
